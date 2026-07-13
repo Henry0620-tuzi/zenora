@@ -9,15 +9,15 @@ const ZENORA_LANGUAGES = {
 
 const ZENORA_TRANSLATION_API = 'https://translate.googleapis.com/translate_a/single';
 const ZENORA_LANGUAGE_KEY = 'zenora-language';
-const ZENORA_CACHE_PREFIX = 'zenora-translation-v2:';
+const ZENORA_CACHE_PREFIX = 'zenora-translation-v3:';
 const ZENORA_SEPARATOR = '\n[[ZENORA_TRANSLATION_BREAK]]\n';
 const ZENORA_BATCH_LIMIT = 3200;
 const ZENORA_PROTECTED_TERMS = {
-  ZENORA: '__ZENORA_BRAND__',
-  USD: '__ZENORA_USD__',
-  EUR: '__ZENORA_EUR__',
-  GBP: '__ZENORA_GBP__',
-  'support@zenora.com': '__ZENORA_SUPPORT_EMAIL__'
+  ZENORA: '[[[0]]]',
+  USD: '[[[1]]]',
+  EUR: '[[[2]]]',
+  GBP: '[[[3]]]',
+  'support@zenora.com': '[[[4]]]'
 };
 
 const zenoraTranslationState = {
