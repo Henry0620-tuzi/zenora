@@ -24,7 +24,9 @@ const zenoraTranslationState = {
   nodes: [],
   originalTitle: document.title,
   controller: null,
-  requestId: 0
+  requestId: 0,
+  textOriginals: new WeakMap(),
+  attributeOriginals: new WeakMap()
 };
 
 function shouldTranslateText(value, parent) {
@@ -43,12 +45,14 @@ function collectTranslatableNodes() {
 
   while ((node = walker.nextNode())) {
     if (!shouldTranslateText(node.nodeValue, node.parentElement)) continue;
+    const original = zenoraTranslationState.textOriginals.get(node) || node.nodeValue;
+    zenoraTranslationState.textOriginals.set(node, original);
     nodes.push({
       node,
-      original: node.nodeValue,
-      value: node.nodeValue.trim(),
-      leading: node.nodeValue.match(/^\s*/)?.[0] || '',
-      trailing: node.nodeValue.match(/\s*$/)?.[0] || ''
+      original,
+      value: original.trim(),
+      leading: original.match(/^\s*/)?.[0] || '',
+      trailing: original.match(/\s*$/)?.[0] || ''
     });
   }
 
@@ -56,7 +60,11 @@ function collectTranslatableNodes() {
     ['placeholder', 'aria-label', 'title'].forEach((attribute) => {
       const value = element.getAttribute(attribute);
       if (!value || !/[A-Za-z]/.test(value) || element.closest('[data-no-translate]')) return;
-      nodes.push({ element, attribute, original: value, value });
+      const originals = zenoraTranslationState.attributeOriginals.get(element) || {};
+      const original = originals[attribute] || value;
+      originals[attribute] = original;
+      zenoraTranslationState.attributeOriginals.set(element, originals);
+      nodes.push({ element, attribute, original, value: original });
     });
   });
 
@@ -251,8 +259,16 @@ function initZenoraTranslation() {
   setLanguage(savedLanguage, { initial: true });
 }
 
+async function translateCurrentPage() {
+  const currentLanguage = localStorage.getItem(ZENORA_LANGUAGE_KEY) || 'en';
+  collectTranslatableNodes();
+  await setLanguage(currentLanguage, { initial: true });
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initZenoraTranslation, { once: true });
 } else {
   initZenoraTranslation();
 }
+
+window.zenoraTranslateCurrentPage = translateCurrentPage;
