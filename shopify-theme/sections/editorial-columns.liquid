@@ -1,0 +1,88 @@
+<section class="section-space">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+
+    <div class="editorial-grid">
+      {% for block in section.blocks %}
+        <article class="editorial-card" {{ block.shopify_attributes }}>
+          <h3 class="card-title">{{ block.settings.title }}</h3>
+          <p>{{ block.settings.body }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial columns",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Merchandising Notes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A homepage that sells the silhouette, the customer mood, and the market logic."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "City luxury with discipline"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "The visual tone stays warm and elevated, but the language remains disciplined enough to feel like a real brand rather than a generic fashion template."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial columns",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "City luxury with discipline",
+            "body": "The visual tone stays warm and elevated, but the language remains disciplined enough to feel like a real brand rather than a generic fashion template."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Women first, men second",
+            "body": "Womenswear carries the emotional center of the store, while the supporting menswear capsule broadens the basket without diluting the identity."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Written for US and Europe",
+            "body": "The sections read like a launch story tailored to cross-border fashion customers who care about fit confidence, delivery clarity, and a more premium wardrobe point of view."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

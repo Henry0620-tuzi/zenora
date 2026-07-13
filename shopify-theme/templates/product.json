@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "settings": {
+            "text": "ZENORA Signature Womenswear"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "market_note": "Localized market pricing"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_guide": {
+          "type": "size_guide",
+          "settings": {
+            "label": "Fit notes",
+            "sizes": "XS, S, M, L, XL",
+            "fit_note": "Replace this with real garment measurements, model details, and market-specific sizing guidance for customers in the United States and Europe."
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "micro_copy": "Secure checkout. Duties and taxes are surfaced at checkout where applicable for US and European orders."
+          }
+        },
+        "benefits": {
+          "type": "benefits",
+          "settings": {
+            "items": "Breathable fabrics and controlled drape for a cleaner city silhouette\nClear fit communication for first-order confidence across markets\nWomenswear-led styling with a selective menswear extension\nBuilt for commuting, travel, and repeat wear"
+          }
+        },
+        "shipping": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns",
+            "body": "<p>Processing, delivery windows, and returns policy should be localized by target market. For launch, keep the message simple, premium, and trust-building for US and European customers.</p>"
+          }
+        },
+        "care": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Fabric and care",
+            "body": "<p>Use this area for material composition, care instructions, and quality cues that justify your premium price range while reinforcing the brand's cleaner lines and softer textures.</p>"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "title", "price", "description", "variant_picker", "size_guide", "buy_buttons", "benefits", "shipping", "care"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

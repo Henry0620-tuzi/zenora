@@ -1,0 +1,22 @@
+{
+  "header": {
+    "cart": "Basket"
+  },
+  "cart": {
+    "drawer_title": "Your basket",
+    "close": "Close basket",
+    "view_cart": "View basket",
+    "updating": "Updating item...",
+    "quantity_label": "Quantity",
+    "decrease_quantity": "Decrease quantity",
+    "increase_quantity": "Increase quantity"
+  },
+  "sections": {
+    "collection": {
+      "loading": "Updating collection..."
+    }
+  },
+  "footer": {
+    "newsletter_submit": "Sign up"
+  }
+}

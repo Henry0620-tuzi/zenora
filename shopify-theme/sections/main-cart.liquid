@@ -1,0 +1,56 @@
+<section class="section-space">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{{ 'header.cart' | t }}</p>
+        <h1>{{ 'header.cart' | t }}</h1>
+      </div>
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-layout">
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <article class="cart-item">
+              <div class="cart-item__media">
+                {% if item.image %}
+                  {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: item.image.alt | escape }}
+                {% endif %}
+              </div>
+              <div class="cart-item__content">
+                <p class="product-meta__title"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+                <p class="section-copy">{{ item.variant.title }}</p>
+                <p class="product-meta__price">{{ item.final_price | money }}</p>
+                <p class="section-copy">Qty: {{ item.quantity }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        <aside class="cart-summary">
+          <div class="detail-card">
+            <p class="eyebrow">Order Summary</p>
+            <div class="results-head">
+              <span>{{ 'header.cart' | t }}</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <p class="section-copy">{{ 'sections.product.price_badge' | t }}</p>
+            <a class="button button--primary" href="/checkout">Checkout</a>
+          </div>
+        </aside>
+      </div>
+    {% else %}
+      <div class="detail-card">
+        <p class="section-copy">{{ 'cart.empty' | t }}</p>
+        <a class="button button--primary" href="{{ routes.collections_url }}">{{ 'header.shop' | t }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

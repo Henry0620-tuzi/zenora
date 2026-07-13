@@ -1,0 +1,80 @@
+<section class="hero-banner">
+  <div class="page-width hero-banner__grid">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="hero-banner__heading">{{ section.settings.heading }}</h1>
+      <div class="hero-banner__text">{{ section.settings.body }}</div>
+      <div class="hero-actions">
+        {% if section.settings.primary_label != blank %}
+          <a class="button button--primary" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+        {% endif %}
+        {% if section.settings.secondary_label != blank %}
+          <a class="button button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <span class="hero-visual__label">{{ section.settings.visual_label }}</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ZENORA City Wardrobe"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Minimalist dressing for women who move through the city with intent."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>ZENORA builds a polished daily wardrobe around clean tailoring, fluid lines, and a subtle avant-garde edge. Womenswear defines the brand point of view, while menswear plays a quieter supporting role for customers in the United States and Europe.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop New In"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Explore Collections"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "visual_label",
+      "label": "Visual label",
+      "default": "Women First Edit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,59 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "primary_link": "shopify://collections/all",
+        "secondary_link": "shopify://collections/all"
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "blocks": {
+        "item1": {
+          "type": "item",
+          "settings": {
+            "text": "Clean silhouettes shaped for weekday movement"
+          }
+        },
+        "item2": {
+          "type": "item",
+          "settings": {
+            "text": "Premium tone without visual excess"
+          }
+        },
+        "item3": {
+          "type": "item",
+          "settings": {
+            "text": "Fit guidance built for cross-border conversion"
+          }
+        },
+        "item4": {
+          "type": "item",
+          "settings": {
+            "text": "Women-led assortment with a menswear extension"
+          }
+        }
+      },
+      "block_order": ["item1", "item2", "item3", "item4"],
+      "settings": {}
+    },
+    "categories": {
+      "type": "category-grid",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "story": {
+      "type": "brand-story",
+      "settings": {}
+    },
+    "editorial": {
+      "type": "editorial-columns",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "trust", "categories", "featured", "story", "editorial"]
+}

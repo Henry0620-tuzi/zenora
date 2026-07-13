@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-faq",
+      "settings": {},
+      "blocks": {
+        "qa_1": {
+          "type": "qa",
+          "settings": {
+            "category": "Sizing",
+            "question": "How do I choose my size with confidence?",
+            "answer": "<p>Start with the measurements listed on each product page. Most ZENORA styles should be described through clean, softly relaxed lines, supported by model notes and garment measurements.</p>"
+          }
+        },
+        "qa_2": {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping",
+            "question": "How long does delivery take from order to arrival?",
+            "answer": "<p>Use market-specific delivery windows for the United States and Europe and avoid vague timing promises. A launch-stage setup can position US delivery around 6-10 business days and many European routes around 4-8 business days.</p>"
+          }
+        },
+        "qa_3": {
+          "type": "qa",
+          "settings": {
+            "category": "Returns",
+            "question": "Can I return or exchange an item if the fit is not right?",
+            "answer": "<p>Most launch-stage brands keep returns simple before adding more complex exchange workflows. State the return window clearly and keep the policy easy to understand across regions.</p>"
+          }
+        },
+        "qa_4": {
+          "type": "qa",
+          "settings": {
+            "category": "Currency",
+            "question": "Will I see prices in USD, EUR, or GBP?",
+            "answer": "<p>Use Shopify Markets to surface local pricing by market. Keep displayed pricing consistent with your selected market and ad landing pages.</p>"
+          }
+        },
+        "qa_5": {
+          "type": "qa",
+          "settings": {
+            "category": "Duties and taxes",
+            "question": "Will I need to pay customs duties or import taxes?",
+            "answer": "<p>That depends on destination and your tax configuration. Explain clearly at checkout whether duties are collected upfront or on delivery so customers understand total landed cost before placing the order.</p>"
+          }
+        },
+        "qa_6": {
+          "type": "qa",
+          "settings": {
+            "category": "Support",
+            "question": "How can I reach customer support if I need help before ordering?",
+            "answer": "<p>Use email-first support during launch. You can add separate inboxes for creators, wholesale, and press as the brand grows, while keeping support@zenora.com as the main customer contact.</p>"
+          }
+        }
+      },
+      "block_order": ["qa_1", "qa_2", "qa_3", "qa_4", "qa_5", "qa_6"]
+    }
+  },
+  "order": ["main"]
+}

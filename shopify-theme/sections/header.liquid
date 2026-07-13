@@ -1,0 +1,70 @@
+{%- liquid
+  assign primary_menu = section.settings.menu
+-%}
+
+<header class="site-header">
+  <div class="page-width site-header__inner">
+    <a class="brand-mark" href="{{ routes.root_url }}">
+      {{ section.settings.brand_name | default: shop.name }}
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      {% if primary_menu != blank %}
+        {% for link in primary_menu.links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.collections_url }}">{{ 'header.shop' | t }}</a>
+        <a href="/pages/about">{{ 'header.about' | t }}</a>
+        <a href="/pages/faq">{{ 'header.faq' | t }}</a>
+      {% endif %}
+    </nav>
+
+    <div class="header-actions">
+      {% if section.settings.cta_label != blank %}
+        <a class="muted-link" href="{{ section.settings.cta_link | default: routes.collections_url }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+      <a class="muted-link" data-open-cart-drawer href="{{ routes.cart_url }}">
+        {{ 'header.cart' | t }}<span data-cart-count>{% if cart != empty %} ({{ cart.item_count }}){% else %} (0){% endif %}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ZENORA"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Action label",
+      "default": "Shop New In"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Action link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

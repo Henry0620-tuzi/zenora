@@ -1,0 +1,72 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    }
+  },
+  "header": {
+    "cart": "Cart",
+    "account": "Account",
+    "shop": "Shop",
+    "about": "About",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "newsletter_email": "Email address",
+    "newsletter_submit": "Sign up"
+  },
+  "cart": {
+    "drawer_title": "Your cart",
+    "close": "Close cart",
+    "loading": "Updating your cart...",
+    "updating": "Updating item...",
+    "subtotal": "Subtotal",
+    "view_cart": "View cart",
+    "checkout": "Checkout",
+    "empty": "Your cart is currently empty.",
+    "taxes_notice": "Taxes, duties, and shipping are calculated at checkout where applicable.",
+    "added": "Added to cart",
+    "remove": "Remove",
+    "error": "We couldn't update your cart. Please try again.",
+    "quantity_label": "Quantity",
+    "decrease_quantity": "Decrease quantity",
+    "increase_quantity": "Increase quantity"
+  },
+  "sections": {
+    "featured_collection": {
+      "view_all": "View all"
+    },
+    "collection": {
+      "products_count": "{{ count }} products",
+      "connect_collection": "Connect a collection to preview live product cards.",
+      "sort_by": "Sort by",
+      "filter_title": "Filter",
+      "selected_count": "{{ count }} selected",
+      "reset": "Reset",
+      "clear_all": "Clear all",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply",
+      "loading": "Updating collection...",
+      "availability": "Availability",
+      "no_filters": "Filters appear here after they are configured in Shopify Search & Discovery."
+    },
+    "product": {
+      "gallery": "Product gallery",
+      "detail": "Detail {{ number }}",
+      "variant": "Variant",
+      "size_guidance": "Size guidance",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "price_badge": "USD / EUR / GBP ready",
+      "option_unavailable": "This combination is unavailable",
+      "select_option": "Select {{ name }}",
+      "status_added": "Added to cart",
+      "status_ok": "",
+      "status_error": "Please choose an available option.",
+      "status_select_variant": "Select a valid variant before adding to cart."
+    }
+  }
+}

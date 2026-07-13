@@ -1,0 +1,22 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "newsletter-signup": {
+      "type": "newsletter-signup",
+      "settings": {
+        "eyebrow": "Join ZENORA",
+        "heading": "Invite first-time visitors into the ZENORA wardrobe world.",
+        "body": "Use this section for US and Europe launch updates, early access to womenswear drops, or private previews of the menswear capsule."
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_name": "ZENORA",
+        "footer_copy": "A women-led fashion concept shaped by minimalist commuting, urban light luxury, and directional calm."
+      }
+    }
+  },
+  "order": ["newsletter-signup", "footer"]
+}

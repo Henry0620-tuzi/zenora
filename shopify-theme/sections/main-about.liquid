@@ -1,0 +1,109 @@
+<section class="section-space">
+  <div class="page-width page-hero">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="page-hero__heading">{{ section.settings.heading }}</h1>
+    </div>
+    <div class="about-copy section-copy">{{ section.settings.intro }}</div>
+  </div>
+</section>
+
+<section class="section-space" style="padding-top: 0;">
+  <div class="page-width value-grid">
+    {% for block in section.blocks %}
+      <article class="detail-card" {{ block.shopify_attributes }}>
+        <p class="eyebrow">{{ block.settings.eyebrow }}</p>
+        <h2 class="card-title">{{ block.settings.title }}</h2>
+        <div class="section-copy">{{ block.settings.body }}</div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main about",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "About ZENORA"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A women-led wardrobe brand built for clarity, movement, and city confidence."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>ZENORA was imagined for women who want the polish of luxury dressing without stiffness, excess, or trend fatigue. We focus on a clean city wardrobe with softened tailoring, premium materials, and a subtle avant-garde attitude that feels wearable from weekday commuting to after-hours plans.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Our Point of View"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Less clutter. Better lines. More confidence in motion."
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>The ZENORA customer is drawn to confidence over spectacle. She wants pieces that feel sharp in a city context, hold up across repeated wear, and still bring an individual point of view.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main about",
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Our Point of View",
+            "title": "Less clutter. Better lines. More confidence in motion."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "eyebrow": "What We Prioritize",
+            "title": "Fit clarity, premium texture, and a women-first assortment strategy."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Brand Structure",
+            "title": "Womenswear as the core identity, with menswear as a selective supporting capsule."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Launch Markets",
+            "title": "Built for the United States and Europe, with localized USD, EUR, and GBP pricing."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

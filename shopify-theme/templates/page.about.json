@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-about",
+      "settings": {},
+      "blocks": {
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Our Point of View",
+            "title": "Less clutter. Better lines. More confidence in motion."
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "eyebrow": "What We Prioritize",
+            "title": "Fit clarity, premium texture, and a women-first assortment strategy."
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Brand Structure",
+            "title": "Womenswear as the core identity, with menswear as a selective supporting capsule."
+          }
+        },
+        "value_4": {
+          "type": "value",
+          "settings": {
+            "eyebrow": "Launch Markets",
+            "title": "Built for the United States and Europe, with localized USD, EUR, and GBP pricing."
+          }
+        }
+      },
+      "block_order": ["value_1", "value_2", "value_3", "value_4"]
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,72 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Zum Inhalt springen"
+    }
+  },
+  "header": {
+    "cart": "Warenkorb",
+    "account": "Konto",
+    "shop": "Shop",
+    "about": "Über uns",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "newsletter_email": "E-Mail-Adresse",
+    "newsletter_submit": "Anmelden"
+  },
+  "cart": {
+    "drawer_title": "Dein Warenkorb",
+    "close": "Warenkorb schließen",
+    "loading": "Warenkorb wird aktualisiert...",
+    "updating": "Artikel wird aktualisiert...",
+    "subtotal": "Zwischensumme",
+    "view_cart": "Warenkorb ansehen",
+    "checkout": "Zur Kasse",
+    "empty": "Dein Warenkorb ist derzeit leer.",
+    "taxes_notice": "Steuern, Abgaben und Versand werden gegebenenfalls im Checkout berechnet.",
+    "added": "Zum Warenkorb hinzugefügt",
+    "remove": "Entfernen",
+    "error": "Der Warenkorb konnte nicht aktualisiert werden. Bitte versuche es erneut.",
+    "quantity_label": "Menge",
+    "decrease_quantity": "Menge verringern",
+    "increase_quantity": "Menge erhöhen"
+  },
+  "sections": {
+    "featured_collection": {
+      "view_all": "Alle ansehen"
+    },
+    "collection": {
+      "products_count": "{{ count }} Produkte",
+      "connect_collection": "Verbinde eine Kollektion, um echte Produkte anzuzeigen.",
+      "sort_by": "Sortieren nach",
+      "filter_title": "Filter",
+      "selected_count": "{{ count }} ausgewählt",
+      "reset": "Zurücksetzen",
+      "clear_all": "Alle löschen",
+      "from": "Von",
+      "to": "Bis",
+      "apply": "Anwenden",
+      "loading": "Kollektion wird aktualisiert...",
+      "availability": "Verfügbarkeit",
+      "no_filters": "Filter werden hier angezeigt, sobald sie in Shopify Search & Discovery konfiguriert sind."
+    },
+    "product": {
+      "gallery": "Produktgalerie",
+      "detail": "Detail {{ number }}",
+      "variant": "Variante",
+      "size_guidance": "Größenhinweis",
+      "quantity": "Menge",
+      "add_to_cart": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "price_badge": "Für USD / EUR / GBP vorbereitet",
+      "option_unavailable": "Diese Kombination ist nicht verfügbar",
+      "select_option": "{{ name }} auswählen",
+      "status_added": "Zum Warenkorb hinzugefügt",
+      "status_ok": "",
+      "status_error": "Bitte wähle eine verfügbare Option.",
+      "status_select_variant": "Bitte wähle vor dem Hinzufügen eine gültige Variante."
+    }
+  }
+}

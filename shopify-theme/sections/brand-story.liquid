@@ -1,0 +1,93 @@
+<section class="section-space">
+  <div class="page-width brand-story__grid">
+    <article class="story-card">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="story-card__heading">{{ section.settings.heading }}</h2>
+      <div class="story-card__body">{{ section.settings.body }}</div>
+    </article>
+
+    <div class="metric-list">
+      {% for block in section.blocks %}
+        <article class="metric-card" {{ block.shopify_attributes }}>
+          <strong class="metric-number">{{ block.settings.number }}</strong>
+          <span>{{ block.settings.label }}</span>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand story",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ZENORA"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Minimalist commuting meets urban light luxury."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>ZENORA is a women-led fashion label shaped around minimalist commuting, subtle luxury, and a controlled avant-garde attitude. The brand language stays refined and architectural rather than loud, so the clothes feel polished, current, and easy to repeat across the United States and Europe.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "metric",
+      "name": "Metric",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "Women-led"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Primary assortment and styling narrative"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand story",
+      "blocks": [
+        {
+          "type": "metric",
+          "settings": {
+            "number": "49.99-499.99",
+            "label": "USD and EUR core price band"
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "number": "39.99-399.99",
+            "label": "GBP market price band"
+          }
+        },
+        {
+          "type": "metric",
+          "settings": {
+            "number": "US + Europe",
+            "label": "Priority regions for launch, logistics, and storytelling"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

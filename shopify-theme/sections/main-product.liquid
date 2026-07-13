@@ -1,0 +1,335 @@
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+  assign selected_variant = product.selected_or_first_available_variant
+-%}
+
+<section class="section-space">
+  <div
+    class="page-width main-product"
+    data-product-root
+    data-string-add-to-cart="{{ 'sections.product.add_to_cart' | t }}"
+    data-string-sold-out="{{ 'sections.product.sold_out' | t }}"
+    data-string-unavailable="{{ 'sections.product.unavailable' | t }}"
+    data-string-price-badge="{{ 'sections.product.price_badge' | t }}"
+    data-string-option-unavailable="{{ 'sections.product.option_unavailable' | t }}"
+    data-string-added="{{ 'sections.product.status_added' | t }}"
+    data-string-status-error="{{ 'sections.product.status_error' | t }}"
+    data-string-select-variant="{{ 'sections.product.status_select_variant' | t }}"
+  >
+    <div class="product-gallery">
+      <div class="product-gallery__track" data-media-gallery>
+        {% if product.media.size > 0 %}
+          {% for media in product.media limit: 4 %}
+            <div
+              id="ProductMedia-{{ section.id }}-{{ media.id }}"
+              class="product-gallery__hero product-gallery__slide {% if forloop.first %}is-active{% endif %}"
+              data-media-slide="{{ media.id }}"
+              {% unless forloop.first %}hidden{% endunless %}
+              aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+            >
+              <span class="visual-label">
+                {% if forloop.first %}
+                  {{ 'sections.product.gallery' | t }}
+                {% else %}
+                  {{ 'sections.product.detail' | t: number: forloop.index }}
+                {% endif %}
+              </span>
+              {{ media | image_url: width: 1200 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200', alt: media.alt | escape }}
+            </div>
+          {% endfor %}
+        {% elsif product.featured_media %}
+          <div id="ProductMedia-{{ section.id }}-featured" class="product-gallery__hero product-gallery__slide is-active" data-media-slide="featured" aria-hidden="false">
+            <span class="visual-label">{{ 'sections.product.gallery' | t }}</span>
+            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200', alt: product.featured_media.alt | escape }}
+          </div>
+        {% endif %}
+
+        <div class="product-gallery__thumbs">
+          {% for media in product.media limit: 4 %}
+            <div class="product-gallery__thumb">
+              <button
+                type="button"
+                class="product-gallery__thumb-button {% if forloop.first %}is-active{% endif %}"
+                data-media-thumb="{{ media.id }}"
+                aria-label="{{ 'sections.product.detail' | t: number: forloop.index }}"
+                aria-controls="ProductMedia-{{ section.id }}-{{ media.id }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                {{ media | image_url: width: 300 | image_tag: loading: 'lazy', widths: '100, 160, 240, 300', alt: media.alt | escape }}
+              </button>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="product-panel">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'text' %}
+            <p class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+          {% when 'title' %}
+            <h1 class="main-product__title" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+
+          {% when 'price' %}
+            <div class="price-row" {{ block.shopify_attributes }}>
+              <strong data-product-price>{{ selected_variant.price | money }}</strong>
+              {% if selected_variant.compare_at_price > selected_variant.price %}
+                <span class="compare-price" data-compare-price>{{ selected_variant.compare_at_price | money }}</span>
+              {% else %}
+                <span class="compare-price" data-compare-price hidden></span>
+              {% endif %}
+              <span class="save-badge" data-product-badge>
+                {% if block.settings.market_note != blank %}
+                  {{ block.settings.market_note }}
+                {% else %}
+                  {{ 'sections.product.price_badge' | t }}
+                {% endif %}
+              </span>
+            </div>
+
+          {% when 'description' %}
+            <div class="product-summary" {{ block.shopify_attributes }}>
+              {{ product.description | strip_html | truncatewords: 40 }}
+            </div>
+
+          {% when 'variant_picker' %}
+            <div {{ block.shopify_attributes }}>
+              {% for option in product.options_with_values %}
+                <fieldset class="product-option" data-product-option>
+                  <legend class="product-option__legend">{{ option.name }}</legend>
+                  <div class="product-option__values">
+                    {% for option_value in option.values %}
+                      {% assign option_id = section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0 %}
+                      <input
+                        class="product-option__radio"
+                        type="radio"
+                        id="Option-{{ option_id }}"
+                        name="options[{{ option.name | escape }}]"
+                        value="{{ option_value | escape }}"
+                        data-option-value-id="{{ option_value.id }}"
+                        {% if option_value.product_url %}
+                          data-product-url="{{ option_value.product_url }}"
+                        {% endif %}
+                        {% if option_value.selected %}checked{% endif %}
+                        {% unless option_value.available %}disabled{% endunless %}
+                      >
+                      <label class="product-option__label {% unless option_value.available %}is-disabled{% endunless %}" for="Option-{{ option_id }}">
+                        {{ option_value }}
+                      </label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              {% endfor %}
+            </div>
+
+          {% when 'size_guide' %}
+            <div {{ block.shopify_attributes }}>
+              <div class="option-head">
+                <span>{{ 'sections.product.size_guidance' | t }}</span>
+                <span>{{ block.settings.label }}</span>
+              </div>
+              <div class="size-grid">
+                {% for label in block.settings.sizes | split: ',' %}
+                  <button type="button" class="{% if forloop.first %}is-active{% endif %}">{{ label | strip }}</button>
+                {% endfor %}
+              </div>
+              <p class="fit-note">{{ block.settings.fit_note }}</p>
+            </div>
+
+          {% when 'buy_buttons' %}
+            <div class="purchase-card" {{ block.shopify_attributes }}>
+              {% form 'product', product, id: product_form_id %}
+                <input data-variant-id-input type="hidden" name="id" value="{{ selected_variant.id }}">
+                <div class="quantity-row">
+                  <span>{{ 'sections.product.quantity' | t }}</span>
+                  <div class="qty-shell" data-quantity-wrapper>
+                    <button class="qty-button" data-quantity-button="-1" type="button" aria-label="{{ 'cart.decrease_quantity' | t }}">-</button>
+                    <label class="visually-hidden" for="ProductQuantity-{{ section.id }}">{{ 'cart.quantity_label' | t }}</label>
+                    <input id="ProductQuantity-{{ section.id }}" type="number" name="quantity" value="1" min="1" aria-label="{{ 'cart.quantity_label' | t }}" style="width: 52px; background: transparent; border: 0; color: inherit; text-align: center;">
+                    <button class="qty-button" data-quantity-button="1" type="button" aria-label="{{ 'cart.increase_quantity' | t }}">+</button>
+                  </div>
+                </div>
+                <div class="product-actions" style="margin-top: 14px;">
+                  <button data-add-to-cart type="submit" class="button button--primary product-form__submit" {% unless selected_variant.available %}disabled{% endunless %}>
+                    <span class="button__text">
+                      {% if selected_variant.available %}{{ 'sections.product.add_to_cart' | t }}{% else %}{{ 'sections.product.sold_out' | t }}{% endif %}
+                    </span>
+                    <span class="button__spinner">{% render 'icon-spinner' %}</span>
+                  </button>
+                </div>
+                {% if block.settings.show_dynamic_checkout %}
+                  {{ form | payment_button }}
+                {% endif %}
+              {% endform %}
+              <p class="micro-copy">{{ block.settings.micro_copy }}</p>
+              <p class="product-status" data-product-status aria-live="polite"></p>
+            </div>
+
+          {% when 'benefits' %}
+            <div class="benefit-list" {{ block.shopify_attributes }}>
+              <div class="benefit-list__item" data-product-availability>
+                {% if selected_variant.available %}{{ 'sections.product.price_badge' | t }}{% else %}{{ 'sections.product.sold_out' | t }}{% endif %}
+              </div>
+              {% for line in block.settings.items | newline_to_br | split: '<br />' %}
+                <div class="benefit-list__item">{{ line }}</div>
+              {% endfor %}
+            </div>
+
+          {% when 'accordion' %}
+            <div class="accordion-stack" {{ block.shopify_attributes }}>
+              <div class="detail-card">
+                <p class="eyebrow">{{ block.settings.heading }}</p>
+                <div class="accordion-copy">{{ block.settings.body }}</div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Eyebrow",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "ZENORA Signature Womenswear"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "market_note",
+          "label": "Market note",
+          "default": "Localized market pricing"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1
+    },
+    {
+      "type": "size_guide",
+      "name": "Size guide",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Fit notes"
+        },
+        {
+          "type": "text",
+          "id": "sizes",
+          "label": "Sizes",
+          "default": "XS, S, M, L, XL"
+        },
+        {
+          "type": "textarea",
+          "id": "fit_note",
+          "label": "Fit note",
+          "default": "Use this space for real garment fit notes, model details, and market-specific sizing guidance for customers shopping from the United States and Europe."
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Show dynamic checkout button",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "micro_copy",
+          "label": "Micro copy",
+          "default": "Secure checkout. Duties and taxes are surfaced at checkout where applicable for US and European orders."
+        }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "Benefits",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Benefit items",
+          "default": "Breathable fabrics and controlled drape for a cleaner city silhouette\nClear fit communication for first-order confidence across markets\nWomenswear-led styling with a selective menswear extension\nBuilt for commuting, travel, and repeat wear"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Detail card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shipping and returns"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Use this section for shipping timing, returns window, care notes, or duties guidance tailored to your US and European launch markets.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main product",
+      "blocks": [
+        { "type": "text" },
+        { "type": "title" },
+        { "type": "price" },
+        { "type": "description" },
+        { "type": "variant_picker" },
+        { "type": "size_guide" },
+        { "type": "buy_buttons" },
+        { "type": "benefits" },
+        { "type": "accordion", "settings": { "heading": "Shipping and returns" } },
+        { "type": "accordion", "settings": { "heading": "Fabric and care" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

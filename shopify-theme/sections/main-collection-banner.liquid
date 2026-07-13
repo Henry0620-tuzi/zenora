@@ -1,0 +1,54 @@
+<section class="section-space">
+  <div class="page-width collection-banner">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="template-title">
+        {% if collection %}
+          {{ collection.title }}
+        {% else %}
+          {{ section.settings.fallback_title }}
+        {% endif %}
+      </h1>
+    </div>
+    <div class="collection-banner__copy">
+      {% if collection and collection.description != blank %}
+        {{ collection.description }}
+      {% else %}
+        {{ section.settings.fallback_copy }}
+      {% endif %}
+      <p class="market-note">{{ section.settings.market_note }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback title",
+      "default": "Women's new arrivals shaped for commute hours, city evenings, and repeat wear."
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_copy",
+      "label": "Fallback copy",
+      "default": "This edit leads with womenswear: clean dresses, directional tailoring, and elevated separates that feel composed rather than overworked. A smaller menswear capsule supports the collection with the same quiet luxury tone."
+    },
+    {
+      "type": "textarea",
+      "id": "market_note",
+      "label": "Market note",
+      "default": "Use separate collections for womenswear, menswear, tailoring, and core layers, then localize intros and shipping messages for USD, EUR, and GBP markets where needed."
+    }
+  ]
+}
+{% endschema %}

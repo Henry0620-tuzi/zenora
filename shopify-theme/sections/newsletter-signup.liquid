@@ -1,0 +1,57 @@
+<section class="section-space">
+  <div class="page-width newsletter-signup__panel">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="story-card__heading">{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.body }}</p>
+    </div>
+
+    {% form 'customer', class: 'newsletter-form' %}
+      <input
+        type="hidden"
+        name="contact[tags]"
+        value="newsletter"
+      >
+      <label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">Email</label>
+      <input
+        id="NewsletterEmail-{{ section.id }}"
+        type="email"
+        name="contact[email]"
+        placeholder="{{ 'footer.newsletter_email' | t }}"
+        required
+      >
+      <button type="submit">{{ 'footer.newsletter_submit' | t }}</button>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter signup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Join ZENORA"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Invite first-time visitors into the ZENORA wardrobe world."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Use this section for US and Europe launch updates, early access to womenswear drops, or private previews of the menswear capsule."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter signup"
+    }
+  ]
+}
+{% endschema %}

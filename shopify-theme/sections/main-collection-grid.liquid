@@ -1,0 +1,102 @@
+<section class="section-space">
+  <div
+    class="page-width collection-layout"
+    data-collection-section
+    data-section-id="{{ section.id }}"
+    data-section-url="{{ collection.url | default: routes.all_products_collection_url }}"
+  >
+    <aside class="filter-panel">
+      <div class="filter-block">
+        <p class="filter-title">{{ section.settings.sidebar_heading }}</p>
+        <p class="section-copy">{{ section.settings.sidebar_copy }}</p>
+      </div>
+
+      <div class="filter-block">
+        <p class="filter-title" id="CollectionFiltersTitle-{{ section.id }}">{{ 'sections.collection.filter_title' | t }}</p>
+        {% render 'facets', results: collection, section_id: section.id %}
+      </div>
+    </aside>
+
+    <div class="collection-grid-panel" aria-labelledby="CollectionFiltersTitle-{{ section.id }}">
+      <div class="results-head" data-collection-results-head tabindex="-1">
+        <p data-collection-count>
+          {% if collection %}
+            {{ 'sections.collection.products_count' | t: count: collection.products_count }}
+          {% else %}
+            {{ 'sections.collection.connect_collection' | t }}
+          {% endif %}
+        </p>
+        <div class="visually-hidden" data-collection-status role="status" aria-live="polite" aria-atomic="true"></div>
+        {% if collection %}
+          <form method="get" data-sort-form>
+            <label class="visually-hidden" for="SortBy-{{ section.id }}">{{ 'sections.collection.sort_by' | t }}</label>
+            {% for filter in collection.filters %}
+              {% if filter.type == 'price_range' %}
+                {% if filter.min_value.value %}
+                  <input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}">
+                {% endif %}
+                {% if filter.max_value.value %}
+                  <input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}">
+                {% endif %}
+              {% else %}
+                {% for value in filter.active_values %}
+                  <input type="hidden" name="{{ value.param_name }}" value="{{ value.value }}">
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+            <select id="SortBy-{{ section.id }}" name="sort_by" aria-controls="CollectionProductGridItems-{{ section.id }}">
+              {% for option in collection.sort_options %}
+                <option value="{{ option.value }}" {% if option.value == collection.sort_by or collection.sort_by == blank and option.value == collection.default_sort_by %}selected{% endif %}>
+                  {{ option.name }}
+                </option>
+              {% endfor %}
+            </select>
+          </form>
+        {% endif %}
+      </div>
+
+      {% paginate collection.products by section.settings.products_per_page %}
+        <div class="product-grid" id="CollectionProductGridItems-{{ section.id }}">
+          {% if collection and collection.products_count > 0 %}
+            {% for product in collection.products %}
+              {% render 'product-card', product_card_product: product, index: forloop.index %}
+            {% endfor %}
+          {% else %}
+            {% for i in (1..6) %}
+              {% render 'product-card', product_card_product: blank, index: forloop.index %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sidebar_heading",
+      "label": "Sidebar heading",
+      "default": "Collection strategy"
+    },
+    {
+      "type": "textarea",
+      "id": "sidebar_copy",
+      "label": "Sidebar copy",
+      "default": "Keep womenswear as the primary narrative, use menswear as a selective supporting capsule, and localize pricing plus delivery messaging for USD, EUR, and GBP markets."
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 6,
+      "max": 24,
+      "step": 2,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

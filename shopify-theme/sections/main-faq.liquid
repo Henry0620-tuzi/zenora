@@ -1,0 +1,123 @@
+<section class="section-space">
+  <div class="page-width page-hero">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="page-hero__heading">{{ section.settings.heading }}</h1>
+    </div>
+    <div class="faq-intro section-copy">{{ section.settings.intro }}</div>
+  </div>
+</section>
+
+<section class="section-space" style="padding-top: 0;">
+  <div class="page-width faq-grid">
+    {% for block in section.blocks %}
+      <article class="faq-card" {{ block.shopify_attributes }}>
+        <p class="eyebrow">{{ block.settings.category }}</p>
+        <h2>{{ block.settings.question }}</h2>
+        <div class="section-copy">{{ block.settings.answer }}</div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main FAQ",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Customer Support"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Answers that make a premium cross-border purchase feel more certain."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>For a women-led fashion brand selling into the United States and Europe, strong FAQ content does real conversion work. It answers fit concerns, shipping expectations, customs uncertainty, and return anxiety before those objections interrupt an otherwise high-intent purchase.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Sizing"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do I choose my size?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Use each product page for real fit notes, garment measurements, and model references. Most ZENORA styles should be described through clean, softly relaxed lines rather than body-con or oversized extremes.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main FAQ",
+      "blocks": [
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Sizing",
+            "question": "How do I choose my size with confidence?"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping",
+            "question": "How long does delivery take from order to arrival?"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Returns",
+            "question": "Can I return or exchange an item if the fit is not right?"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Currency",
+            "question": "Will I see prices in USD, EUR, or GBP?"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Duties and taxes",
+            "question": "Will I need to pay customs duties or import taxes?"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "category": "Support",
+            "question": "How can I reach customer support if I need help before ordering?"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

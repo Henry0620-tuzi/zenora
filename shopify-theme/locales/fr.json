@@ -1,0 +1,72 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Aller au contenu"
+    }
+  },
+  "header": {
+    "cart": "Panier",
+    "account": "Compte",
+    "shop": "Boutique",
+    "about": "À propos",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "newsletter_email": "Adresse e-mail",
+    "newsletter_submit": "S'inscrire"
+  },
+  "cart": {
+    "drawer_title": "Votre panier",
+    "close": "Fermer le panier",
+    "loading": "Mise à jour du panier...",
+    "updating": "Mise à jour de l'article...",
+    "subtotal": "Sous-total",
+    "view_cart": "Voir le panier",
+    "checkout": "Paiement",
+    "empty": "Votre panier est actuellement vide.",
+    "taxes_notice": "Les taxes, droits et frais de livraison sont calculés au paiement le cas échéant.",
+    "added": "Ajouté au panier",
+    "remove": "Supprimer",
+    "error": "Impossible de mettre à jour le panier. Veuillez réessayer.",
+    "quantity_label": "Quantité",
+    "decrease_quantity": "Diminuer la quantité",
+    "increase_quantity": "Augmenter la quantité"
+  },
+  "sections": {
+    "featured_collection": {
+      "view_all": "Voir tout"
+    },
+    "collection": {
+      "products_count": "{{ count }} produits",
+      "connect_collection": "Connectez une collection pour afficher de vrais produits.",
+      "sort_by": "Trier par",
+      "filter_title": "Filtres",
+      "selected_count": "{{ count }} sélectionnés",
+      "reset": "Réinitialiser",
+      "clear_all": "Tout effacer",
+      "from": "De",
+      "to": "À",
+      "apply": "Appliquer",
+      "loading": "Mise à jour de la collection...",
+      "availability": "Disponibilité",
+      "no_filters": "Les filtres apparaissent ici une fois configurés dans Shopify Search & Discovery."
+    },
+    "product": {
+      "gallery": "Galerie produit",
+      "detail": "Détail {{ number }}",
+      "variant": "Variante",
+      "size_guidance": "Guide des tailles",
+      "quantity": "Quantité",
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "price_badge": "Préparé pour USD / EUR / GBP",
+      "option_unavailable": "Cette combinaison n'est pas disponible",
+      "select_option": "Sélectionner {{ name }}",
+      "status_added": "Ajouté au panier",
+      "status_ok": "",
+      "status_error": "Veuillez choisir une option disponible.",
+      "status_select_variant": "Veuillez sélectionner une variante valide avant d'ajouter au panier."
+    }
+  }
+}

@@ -1,0 +1,129 @@
+<section class="section-space">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+
+    <div class="category-grid">
+      {% for block in section.blocks %}
+        <article class="category-card category-card--{{ block.settings.tone }}" {{ block.shopify_attributes }}>
+          <div>
+            <p class="card-label">{{ block.settings.label }}</p>
+            <h3 class="card-title">{{ block.settings.title }}</h3>
+          </div>
+          <a href="{{ block.settings.link }}">{{ block.settings.link_label }}</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category grid",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop by Wardrobe Need"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collections built for commuting hours, evening plans, and a calmer luxury wardrobe."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Womenswear"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fluid shapes that hold polish from office hours to dinner plans."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Color tone",
+          "default": "sand",
+          "options": [
+            { "value": "sand", "label": "Sand" },
+            { "value": "clay", "label": "Clay" },
+            { "value": "olive", "label": "Olive" },
+            { "value": "ink", "label": "Ink" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category grid",
+      "blocks": [
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Womenswear",
+            "title": "Fluid shapes that hold polish from office hours to dinner plans.",
+            "link_label": "Shop womenswear",
+            "tone": "sand"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Commute Tailoring",
+            "title": "Soft coordination with sharper lines and urban restraint.",
+            "link_label": "Shop tailoring",
+            "tone": "clay"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Layering Pieces",
+            "title": "Clean lines for women who prefer clarity over ornament.",
+            "link_label": "Shop layers",
+            "tone": "olive"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Menswear Capsule",
+            "title": "Supporting essentials that echo the same quiet, directional finish.",
+            "link_label": "Explore capsule",
+            "tone": "ink"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,58 @@
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="site-footer__inner">
+      <div>
+        <div class="brand-mark">{{ section.settings.brand_name | default: shop.name }}</div>
+        <p class="footer-copy">{{ section.settings.footer_copy }}</p>
+        <p class="footer-meta">
+          {{ settings.markets_label }}
+          <br>
+          {{ settings.support_email }}
+        </p>
+      </div>
+
+      <div class="footer-links">
+        {% if section.settings.menu != blank %}
+          {% for link in section.settings.menu.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="{{ routes.collections_url }}">{{ 'header.shop' | t }}</a>
+          <a href="/pages/about">{{ 'header.about' | t }}</a>
+          <a href="/pages/faq">{{ 'header.faq' | t }}</a>
+          <a href="{{ routes.cart_url }}">{{ 'header.cart' | t }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ZENORA"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_copy",
+      "label": "Footer copy",
+      "default": "A women-led fashion concept shaped by minimalist commuting, urban light luxury, and directional calm."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

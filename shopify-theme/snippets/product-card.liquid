@@ -1,0 +1,40 @@
+{%- liquid
+  assign media_class = 'product-card__media'
+  if index == 2
+    assign media_class = media_class | append: ' product-card__media--two'
+  elsif index == 3
+    assign media_class = media_class | append: ' product-card__media--three'
+  endif
+-%}
+
+<article class="product-card">
+  {% if product_card_product != blank %}
+    <a class="{{ media_class }}" href="{{ product_card_product.url }}">
+      {% if product_card_product.featured_media %}
+        {{ product_card_product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 720, 900', alt: product_card_product.featured_media.alt | escape }}
+      {% endif %}
+    </a>
+    <div class="product-meta">
+      <p class="product-meta__title">
+        <a href="{{ product_card_product.url }}">{{ product_card_product.title }}</a>
+      </p>
+      <p class="product-meta__desc">
+        {{ product_card_product.description | strip_html | truncatewords: 18 }}
+      </p>
+      <div class="product-meta__row">
+        <span class="product-meta__price">{{ product_card_product.price | money }}</span>
+        <span>{{ product_card_product.available | default: true | replace: 'true', 'Available' | replace: 'false', 'Sold out' }}</span>
+      </div>
+    </div>
+  {% else %}
+    <div class="{{ media_class }}"></div>
+    <div class="product-meta">
+      <p class="product-meta__title">Product preview</p>
+      <p class="product-meta__desc">Connect a real Shopify collection to replace these placeholders with live products.</p>
+      <div class="product-meta__row">
+        <span class="product-meta__price">$99.00</span>
+        <span>Preview</span>
+      </div>
+    </div>
+  {% endif %}
+</article>

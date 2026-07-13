@@ -1,0 +1,40 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_1": {
+          "type": "message",
+          "settings": {
+            "text": "Localized pricing across USD, EUR, and GBP"
+          }
+        },
+        "message_2": {
+          "type": "message",
+          "settings": {
+            "text": "Women-led wardrobe system with a selective menswear capsule"
+          }
+        },
+        "message_3": {
+          "type": "message",
+          "settings": {
+            "text": "Free shipping thresholds tailored for the US and Europe"
+          }
+        }
+      },
+      "block_order": ["message_1", "message_2", "message_3"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "brand_name": "ZENORA",
+        "cta_label": "Shop New In",
+        "cta_link": "shopify://collections/all"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

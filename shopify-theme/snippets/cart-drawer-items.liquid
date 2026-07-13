@@ -1,0 +1,56 @@
+{% if cart.item_count > 0 %}
+  <div class="cart-drawer-items">
+    {% for item in cart.items %}
+      <article class="cart-drawer-item">
+        <div class="cart-drawer-item__media">
+          {% if item.image %}
+            {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100, 160, 200', alt: item.image.alt | escape }}
+          {% endif %}
+        </div>
+        <div class="cart-drawer-item__content">
+          <p class="product-meta__title"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+          <p class="section-copy">{{ item.variant.title }}</p>
+          <div class="results-head">
+            <span>{{ item.quantity }} × {{ item.final_price | money }}</span>
+            <strong>{{ item.final_line_price | money }}</strong>
+          </div>
+          <div class="cart-drawer-item__controls" data-line-key="{{ item.key }}">
+            <button type="button" class="qty-button" data-cart-line-change="-1" aria-label="{{ 'cart.decrease_quantity' | t }}">-</button>
+            <label class="visually-hidden" for="CartDrawerQuantity-{{ forloop.index }}">{{ 'cart.quantity_label' | t }}</label>
+            <input
+              id="CartDrawerQuantity-{{ forloop.index }}"
+              class="cart-drawer-item__quantity-input"
+              data-cart-line-quantity
+              type="number"
+              inputmode="numeric"
+              min="0"
+              step="1"
+              name="updates[]"
+              value="{{ item.quantity }}"
+              aria-label="{{ 'cart.quantity_label' | t }}"
+            >
+            <button type="button" class="qty-button" data-cart-line-change="1" aria-label="{{ 'cart.increase_quantity' | t }}">+</button>
+            <button type="button" class="muted-link" data-cart-line-remove="true">{{ 'cart.remove' | t }}</button>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="cart-drawer__footer">
+    <div class="results-head">
+      <span>{{ 'cart.subtotal' | t }}</span>
+      <strong>{{ cart.total_price | money }}</strong>
+    </div>
+    <p class="section-copy">{{ 'cart.taxes_notice' | t }}</p>
+    <div class="cart-drawer__actions">
+      <a class="button button--secondary" href="{{ routes.cart_url }}">{{ 'cart.view_cart' | t }}</a>
+      <a class="button button--primary" href="/checkout">{{ 'cart.checkout' | t }}</a>
+    </div>
+  </div>
+{% else %}
+  <div class="cart-drawer__empty">
+    <p class="section-copy">{{ 'cart.empty' | t }}</p>
+    <a class="button button--primary" href="{{ routes.collections_url }}">{{ 'header.shop' | t }}</a>
+  </div>
+{% endif %}

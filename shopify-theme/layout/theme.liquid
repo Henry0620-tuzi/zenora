@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} | {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} | Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+    </title>
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --bg: {{ settings.color_bg }};
+        --surface: {{ settings.color_surface }};
+        --text: {{ settings.color_text }};
+        --muted: {{ settings.color_muted }};
+        --accent: {{ settings.color_accent }};
+        --accent-strong: {{ settings.color_accent_strong }};
+      }
+    </style>
+    <script>
+      window.themeMoneyFormat = {{ shop.money_format | json }};
+      window.themeRoutes = {
+        root: {{ routes.root_url | json }},
+        cart: {{ routes.cart_url | json }},
+        allProductsCollection: {{ routes.all_products_collection_url | json }}
+      };
+      window.themeStrings = {
+        cartEmpty: {{ 'cart.empty' | t | json }},
+        cartLoading: {{ 'cart.loading' | t | json }},
+        cartUpdating: {{ 'cart.updating' | t | json }},
+        cartSubtotal: {{ 'cart.subtotal' | t | json }},
+        cartView: {{ 'cart.view_cart' | t | json }},
+        cartCheckout: {{ 'cart.checkout' | t | json }},
+        cartTaxesNotice: {{ 'cart.taxes_notice' | t | json }},
+        cartAdded: {{ 'cart.added' | t | json }},
+        cartError: {{ 'cart.error' | t | json }},
+        cartRemove: {{ 'cart.remove' | t | json }},
+        cartQuantityLabel: {{ 'cart.quantity_label' | t | json }},
+        cartIncreaseQuantity: {{ 'cart.increase_quantity' | t | json }},
+        cartDecreaseQuantity: {{ 'cart.decrease_quantity' | t | json }},
+        shop: {{ 'header.shop' | t | json }}
+      };
+      window.themeCollectionStrings = {
+        loading: {{ 'sections.collection.loading' | t | json }}
+      };
+    </script>
+    {{ 'theme.js' | asset_url | script_tag }}
+    {{ content_for_header }}
+  </head>
+  <body class="template-{{ template | replace: '.', ' ' | handle }}">
+    <a class="visually-hidden" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    {% sections 'header-group' %}
+    {% section 'cart-drawer' %}
+    <main id="MainContent" class="site-main" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+  </body>
+</html>
