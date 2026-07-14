@@ -2,6 +2,7 @@ const zenoraConfig = window.ZENORA_STORE_CONFIG;
 const ZENORA_CART_KEY = 'zenora-cart-v1';
 const ZENORA_CONSENT_KEY = 'zenora-consent-v1';
 const ZENORA_ATTRIBUTION_KEY = 'zenora-attribution-v1';
+const ZENORA_EVENT_LOG_KEY = 'zenora-event-log-v1';
 
 const ZENORA_STORE_COPY = {
   en: {
@@ -159,6 +160,25 @@ function trackEvent(name, parameters = {}) {
   window.dispatchEvent(new CustomEvent('zenora:analytics', { detail: payload }));
 
   if (!zenoraStore.consent?.analytics) return;
+  const eventLog = readJson(ZENORA_EVENT_LOG_KEY, []);
+  eventLog.unshift({
+    id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    name,
+    parameters,
+    path: window.location.pathname,
+    timestamp: new Date().toISOString(),
+    attribution: payload.attribution
+  });
+  writeJson(ZENORA_EVENT_LOG_KEY, eventLog.slice(0, 500));
+
+  if (zenoraConfig.analytics.collectorEndpoint) {
+    fetch(zenoraConfig.analytics.collectorEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
+  }
   if (typeof window.gtag === 'function') window.gtag('event', name, parameters);
   if (typeof window.fbq === 'function') window.fbq('trackCustom', name, parameters);
   if (window.ttq?.track) window.ttq.track(name, parameters);

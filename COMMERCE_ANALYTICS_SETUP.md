@@ -57,7 +57,8 @@ newsletter: {
 analytics: {
   ga4MeasurementId: 'G-XXXXXXXXXX',
   metaPixelId: '1234567890',
-  tiktokPixelId: 'XXXXXXXXXX'
+  tiktokPixelId: 'XXXXXXXXXX',
+  collectorEndpoint: 'https://your-api.example.com/events'
 }
 ```
 
@@ -73,7 +74,30 @@ analytics: {
 
 UTM 参数和首次来源会保存在浏览器本地，并随订阅请求和事件一起传递。
 
-## 4. 上线前必做
+## 4. 运营后台
+
+后台入口：`admin.html`
+
+当前后台包含：
+
+- 经营总览和销售趋势
+- 订单、支付、履约和退款列表
+- 商品库存与低库存提醒
+- 客户分群与消费金额
+- 营销活动、预算、收入和 ROAS
+- 渠道归因、国家市场和转化漏斗
+- 实时访客、热门页面、设备分布
+- 浏览器真实事件日志和 CSV 导出
+
+GitHub Pages 无法安全保存管理员密钥，也不能保护后台页面。正式运营建议：
+
+1. 使用 Shopify Admin API 和 Webhook 同步订单、退款、库存和客户。
+2. 使用 Supabase、Cloudflare Workers 或其他后端保存事件和运营数据。
+3. 为 `admin.html` 增加服务端登录、管理员角色和审计日志。
+4. 使用 GA4 Data API 拉取跨设备、跨访客流量，而不是只读取浏览器本地事件。
+5. 所有 Shopify Admin Token、数据库密钥和邮件服务密钥必须放在服务端环境变量中。
+
+## 5. 上线前必做
 
 1. 使用真实 Shopify 商品和 Variant ID 完成测试订单。
 2. 配置支付、物流、税费、退款和 Shopify Markets。

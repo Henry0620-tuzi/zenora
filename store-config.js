@@ -16,7 +16,8 @@ window.ZENORA_STORE_CONFIG = {
   analytics: {
     ga4MeasurementId: '',
     metaPixelId: '',
-    tiktokPixelId: ''
+    tiktokPixelId: '',
+    collectorEndpoint: ''
   },
   products: {
     'the-elara-linen-midi-dress': {

@@ -8,6 +8,8 @@
 
 仓库根目录是可直接部署到 GitHub Pages 的 ZENORA 静态站，入口为 `index.html`。
 
+配套运营后台入口为 `admin.html`，覆盖订单、商品库存、客户、营销、数据分析和实时流量。GitHub Pages 版本使用演示经营数据，并读取当前浏览器产生的真实前台事件；正式运营需连接服务端数据源和管理员鉴权。
+
 `shopify-theme/` 保存可通过 Shopify CLI 上传和联调的主题源码，不参与 GitHub Pages 的运行。
 
 ## 本地预览
@@ -17,3 +19,5 @@ python3 -m http.server 8000
 ```
 
 然后访问 `http://localhost:8000/index.html`。
+
+后台地址：`http://localhost:8000/admin.html`

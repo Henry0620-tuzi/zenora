@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZENORA 运营中心</title>
+    <meta name="description" content="ZENORA 交易、营销、流量与客户运营后台。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./admin.css?v=1" />
+    <script src="./store-config.js?v=1" defer></script>
+    <script src="./admin-data.js?v=1" defer></script>
+    <script src="./admin.js?v=1" defer></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" data-sidebar>
+        <div class="admin-brand">
+          <span class="admin-brand__mark">Z</span>
+          <div><strong>ZENORA</strong><small>Commerce OS</small></div>
+        </div>
+        <nav class="admin-nav" aria-label="后台功能导航">
+          <button class="admin-nav__item is-active" type="button" data-view="overview"><span>◫</span>经营总览</button>
+          <button class="admin-nav__item" type="button" data-view="orders"><span>◎</span>订单交易</button>
+          <button class="admin-nav__item" type="button" data-view="products"><span>◇</span>商品库存</button>
+          <button class="admin-nav__item" type="button" data-view="customers"><span>○</span>客户管理</button>
+          <button class="admin-nav__item" type="button" data-view="marketing"><span>↗</span>营销中心</button>
+          <button class="admin-nav__item" type="button" data-view="analytics"><span>⌁</span>数据分析</button>
+          <button class="admin-nav__item" type="button" data-view="traffic"><span>●</span>实时流量</button>
+          <button class="admin-nav__item" type="button" data-view="settings"><span>⚙</span>系统连接</button>
+        </nav>
+        <div class="admin-sidebar__footer">
+          <span class="mode-badge"><i></i>演示数据模式</span>
+          <a href="./index.html">返回前台网站 ↗</a>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-topbar">
+          <button class="mobile-menu" type="button" data-menu-toggle aria-label="打开后台菜单">☰</button>
+          <div>
+            <p class="admin-kicker">ZENORA 运营中心</p>
+            <h1 data-page-title>经营总览</h1>
+          </div>
+          <div class="admin-topbar__actions">
+            <label class="date-range">
+              <span>时间范围</span>
+              <select data-range>
+                <option value="7">最近 7 天</option>
+                <option value="30">最近 30 天</option>
+                <option value="90">最近 90 天</option>
+              </select>
+            </label>
+            <button class="icon-action" type="button" data-refresh aria-label="刷新数据">↻</button>
+            <button class="profile-button" type="button" aria-label="当前管理员账户"><span>HB</span><i></i></button>
+          </div>
+        </header>
+
+        <div class="admin-content" data-admin-content></div>
+      </main>
+    </div>
+    <div class="admin-toast" role="status" aria-live="polite" data-admin-toast></div>
+  </body>
+</html>
